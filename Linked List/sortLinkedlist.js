@@ -25,12 +25,53 @@ class linkedList{
             this.tail= node
         }
     }
+
+
+    sorting(){
+        if(!this.head || !this.head.next)return
+        let swapped
+        do{
+            swapped =  false
+            let current = this.head
+            while(current.next){
+                if(current && current.next.value < current.value){
+                let temp = current.value
+                current.value = current.next.value
+                current.next.value = temp
+                swapped = true
+                }
+                current = current.next   
+            }
+     
+            
+        }while(swapped)
+    }
+
+   sorting(){
+    if(!this.head||!this.head.next) return
+    let swapped 
+    do{
+        swapped = false
+        let current = this.head
+        while(current.next){
+            if(current&&current.next.value>current.value){
+                let temp = current.value
+                current.value = current.next.value
+                current.next.value = temp
+                swapped= true
+            }
+            current = current.next
+        }
+    }while(swapped)
+}
+
     print(){
         let current = this.head
         let value =""
         while(current){
-            value+="=>"+current.value
+            value+=current.value+"=>"
             current = current.next
+            
         }
         console.log(value)
 
@@ -39,9 +80,12 @@ class linkedList{
 }
 const list = new linkedList()
 
-list.append(12)
-list.append(23)
+list.append(33)
 list.append(44)
+list.append(3)
 list.append(55)
-list.append(99)
+list.append(1)
 list.print()
+list.sorting()
+list.print()
+
