@@ -22,7 +22,7 @@ class QueueUsingStack{
     
 }
 
-const queue = new QueueUsingStack
+const queue = new QueueUsingStack()
 queue.enqueue(12)
 queue.enqueue(33)
 queue.enqueue(44)
