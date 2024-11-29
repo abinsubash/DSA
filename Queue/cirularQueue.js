@@ -24,7 +24,7 @@ class circularQueue{
     }
     }
     dequeue(){
-        let removeItem = this.item[this.front]
+        // let removeItem = this.item[this.front]
         this.item[this.front]=null
         this.front = (this.front+1)%this.capacity
         this.currentLength--
