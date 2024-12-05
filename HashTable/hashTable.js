@@ -2,6 +2,7 @@ class hashTable {
     constructor(size){
         this.table = new Array(size)
         this.size = size
+        let count = 0
     }
     
     hash(key){
@@ -64,6 +65,5 @@ class hashTable {
 const table = new hashTable(50)
 table.set("name","abin")
 table.set("mane","Subash")  
-// table.set
 table.set("age",18)
 table.display()
