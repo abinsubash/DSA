@@ -19,7 +19,9 @@ class StackUsingQueue {
         }
         return this.q1.shift();
     }
-
+    peek(){
+        return this.q1[0]
+    }
     display() {
         console.log(this.q1);
     }
