@@ -5,7 +5,7 @@ class Stack{
     push(value){
         this.items.push(value)
     }
-    pop(){
+    pop(){   
         return this.items.pop()
     }
     getSize(){

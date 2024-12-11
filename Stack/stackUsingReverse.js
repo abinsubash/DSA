@@ -6,17 +6,18 @@ class Stack{
         this.items.push(value)
     }
     pop(){
-        return this.item.pop()
+        return this.items.pop()
     }
-    reverse(str){
-        let newStack =" "
-        for(let i = 0 ; i<str.length;i++){
-            this.items.push(str[i])
+    reverseStr(str){
+        let newStack= new Stack()
+        for(let char of str){
+            newStack.push(char)
         }
-        for(let i = 0 ; i<str.length;i++){
-            newStack +=this.items.pop()
+        let res = ""
+        while(!newStack.isEmpty()){
+            res+=newStack.pop()
         }
-        return newStack
+        return res
     }
 }
 let stack = new Stack()

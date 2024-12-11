@@ -5,10 +5,15 @@ class StackUsingQueue {
     }
 
     push(value) {
+        // Push new element into q2
         this.q2.push(value);
+
+        // Transfer all elements from q1 to q2
         while (this.q1.length) {
             this.q2.push(this.q1.shift());
         }
+
+        // Swap q1 and q2
         [this.q1, this.q2] = [this.q2, this.q1];
     }
 
@@ -17,11 +22,17 @@ class StackUsingQueue {
             console.log("Stack is empty.");
             return;
         }
-        return this.q1.shift();
+        return this.q1.shift(); // Remove the top element
     }
-    peek(){
-        return this.q1[0]
+
+    peek() {
+        if (this.q1.length === 0) {
+            console.log("Stack is empty.");
+            return;
+        }
+        return this.q1[0]; // Return the top element
     }
+
     display() {
         console.log(this.q1);
     }
