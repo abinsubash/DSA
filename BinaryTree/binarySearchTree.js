@@ -37,19 +37,6 @@ class binarySearchTree{
         }
     }
     
-    search(value,root = this.root){
-      if(!root){
-          return false
-      }else{
-          if(root.value == value){
-              return true
-          }else if(value<root.value){
-                return this.search(value,root.left)
-          }else{
-              return this.search(value,root.right)
-          }
-      }
-    }
     
     preOrder(root = this.root){
         if(root){
@@ -90,42 +77,6 @@ class binarySearchTree{
             }
         }
     }
-    min(root = this.root){
-        if(!root.left){
-            return root.value
-        }else{
-            return this.min(root.left)
-        }
-    }
-    max(root = this.root){
-        if(!root.right){
-            return  root.value
-        }else{
-            return this.max(root.right)
-        }
-    }
-    delete(value){
-        this.root =this.deleteNode(this.root,value)
-    }
-    deleteNode(root,value){
-        if(root ==null){
-            return root
-        }
-        if(value<root.value){
-            root.left = this.deleteNode(root.left,value)
-        }else if(value >root.value){
-            root.right = this.deleteNode(root.right,value)
-        }else{
-            if(!root.left&&!root.right){
-                return null
-            }else if(!root.right){
-                return root.left
-            }
-            root.value = this.min(root.right)
-            root.right = this.deleteNode(root.right,root.value)
-        }
-        return root
-    }
     
 }
 const bst = new binarySearchTree()
@@ -144,3 +95,11 @@ console.log("hi")
 bst.delete(2)
 bst.levelOrder()
 // console.log(bst.max())
+
+
+
+
+
+
+
+

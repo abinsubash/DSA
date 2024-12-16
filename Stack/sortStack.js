@@ -12,17 +12,16 @@ class Stack {
         return this.item.length===0
     }
     sort(){
-        let tempStack=[]
+        let newStack =new Stack()
         while(!this.isEmpty()){
             let temp = this.pop()
-            while(tempStack.length>0&&tempStack[tempStack.length-1]<temp){
-                this.push(tempStack.pop())
-                
+            while(!newStack.isEmpty()&&newStack.peek()>temp){
+                this.push(newStack.pop())
             }
-        tempStack.push(temp)
+            newStack.push(temp)
         }
-        while(tempStack.length>0){
-            this.push(tempStack.pop())
+        while(!newStack.isEmpty()){
+            this.push(newStack.pop())
         }
     }
     display(){
