@@ -78,7 +78,7 @@ class BinarySearchTree{
             return false
         }
         return this.isBST(root.left,min,root.value)&&this.isBST(root.right,root.value,max)
-    }
+    }   
     
     findClosest(target){
         let closest = this.root.value
