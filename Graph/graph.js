@@ -74,22 +74,7 @@ class Graph{
     hashEdge(vertex1,vertex2){
         return (this.adjacencyList[vertex1].has(vertex2)&&this.adjacencyList[vertex2].has(vertex1))
     }
-    findSecond(root = this.root,secondLargest=null,largest=null){
-        if(!root) return secondLargest
-        if(largest==null)largest=root.value
-        if(secondLargest==null)secondLargest=root.value
-        if(root.value>largest){
-            secondLargest=largest
-            largest = root.value
-        }else if(root.value<largest&&root.value>secondLargest){
-            secondLargest=root.value
-        }
-        let leftResult=this.findSecond(root.left,secondLargest,largest)
-        let rightResult = this.findSecond(root.right,secondLargest,largest)
-        return Math.max(leftResult,rightResult)
-    }
-    
-    
+   
 }
 const graph = new Graph()
 graph.addVertex("A")

@@ -14,8 +14,7 @@ class Heap {
         while (idx > 0) {
             let parentIdx = Math.floor((idx - 1) / 2); 
             let parent = this.item[parentIdx]; 
-            if (element <= parent) break; 
-
+            if (element <=parent) break;
             [this.item[idx], this.item[parentIdx]] = [this.item[parentIdx], this.item[idx]];
             idx = parentIdx; 
         }

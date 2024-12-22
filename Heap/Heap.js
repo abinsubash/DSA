@@ -77,3 +77,73 @@ heap.display()
 heap.remove()
 console.log('Sorted array',heap.heapSort())
 heap.display()
+
+
+class MinHeap {
+    constructor(){
+        this.item=[]
+    }
+    swap(i,j){
+        [this.item[i],this.item[j]]=[this.item[j],this.item[i]]
+    }
+    insert(value){
+        this.item.push(value)
+        this.bubbleUp(this.item.length-1)
+    }
+    bubbleUp(index){
+        let parentIndex =Math.floor((index-1)/2)
+        while(index>0&&this.item[parentIndex]>this.item[index]){
+            this.swap(index,parentIndex)
+            this.bubbleUp(parentIndex)
+        }
+    }
+    extractMin(){
+        let removeVal = this.item[0]
+        this.item[0]=this.item.pop()
+        this.bubbleDown(0)
+        return removeVal
+    }
+    bubbleDown(index){
+        let left = 2*index+1
+        let right = 2*index+2
+        let smallest = index
+        if(left<this.item.length&&this.item[smallest]>this.item[left]){
+            smallest = left
+        }
+        if(right<this.item.length&&this.item[smallest]>this.item[right]){
+            smallest = right
+        }
+        if(smallest!=index){
+            this.swap(index,smallest)
+            this.bubbleDown(smallest)
+        }
+    }
+    display(){
+        console.log(this.item)
+    }
+    
+}
+
+const minheap=new MinHeap()
+// minheap.insert(21)
+// minheap.insert(44)
+// minheap.insert(6)
+// minheap.insert(8)
+// // minheap.display()
+// minheap.extractMin()
+// // minheap.display()
+
+
+let arr = [12,33,4,55,6,7,8]
+function heapSort(arr){
+    for(let val of arr){
+        minheap.insert(val)
+    }
+    let newarr=[]
+while (newarr.length != arr.length){
+    newarr.push(minheap.extractMin())
+    }
+    console.log(newarr)
+    
+}
+heapSort(arr)

@@ -99,6 +99,24 @@ search(word){
         deletefn(word,this.root,0)
         
     }
+    longestPrifix(){
+        let res = ""
+        function traverse(word,root){
+        if(root.endword){
+            if(word.length>res.length){
+                res = word
+            }
+        }
+        for(let el in root.children){
+            if(root.children[el]){
+                traverse(word+el,root.children[el])
+            }
+        }
+            
+        }
+        traverse("",this.root)
+        return res
+    }
     
 }
 

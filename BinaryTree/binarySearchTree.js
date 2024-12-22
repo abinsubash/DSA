@@ -1,127 +1,192 @@
-class Node{
-    constructor(value){
-        this.value = value
-        this.left = null
-        this.right = null
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 }
 
-class binarySearchTree{
-    constructor(){
-        this.root = null
+class BinarySearchTree {
+    constructor() {
+        this.root = null;
     }
-    isEmpty(){
-        return this.root ==null
+
+    insert(value) {
+        const node = new Node(value);
+        if (this.root == null) {
+            this.root = node;
+        } else {
+            this.insertNode(this.root, node);
+        }
     }
-    insert(value){
-        let newNode = new Node(value)
-        if(this.isEmpty()){
-            this.root = newNode
+
+    insertNode(root, node) {
+        if (node.value < root.value) {
+            if (root.left == null) {
+                root.left = node;
+            } else {
+                this.insertNode(root.left, node);
+            }
+        } else {
+            if (root.right == null) {
+                root.right = node;
+            } else {
+                this.insertNode(root.right, node);
+            }
+        }
+    }
+
+    inOrder(root = this.root) {
+        if (root) {
+            this.inOrder(root.left);
+            console.log(root.value);
+            this.inOrder(root.right);
+        }
+    }
+
+    preOrder(root = this.root) {
+        if (root) {
+            console.log(root.value);
+            this.preOrder(root.left);
+            this.preOrder(root.right);
+        }
+    }
+
+    postOrder(root = this.root) {
+        if (root) {
+            this.postOrder(root.left);
+            this.postOrder(root.right);
+            console.log(root.value);
+        }
+    }
+
+    levelOrder() {
+        let queue = [];
+        queue.push(this.root);
+        while (queue.length > 0) {
+            let cur = queue.shift();
+            console.log(cur.value);
+            if (cur.left) {
+                queue.push(cur.left);
+            }
+            if (cur.right) {
+                queue.push(cur.right);
+            }
+        }
+    }
+
+    delete(value) {
+        this.root = this.deleteNode(value, this.root);
+    }
+
+    deleteNode(value, root) {
+        if (root == null) {
+            return root;
+        }
+        if (root.value > value) {
+            root.left = this.deleteNode(value, root.left);
+        } else if (root.value < value) {
+            root.right = this.deleteNode(value, root.right);
+        } else {
+            if (!root.left && !root.right) {
+                return null;
+            }
+            if (!root.left) {
+                return root.right;
+            }
+            if (!root.right) {
+                return root.left;
+            }
+            root.value = this.min(root.right);
+            root.right = this.deleteNode(root.value, root.right); 
+        }
+        return root;
+    }
+
+    min(root) {
+        if (!root.left) {
+            return root.value;
+        } else {
+            return this.min(root.left);
+        }
+    }
+
+    findClosest(target) {
+        let closest = this.root.value;
+        function traverse(node) {
+            if (node == null) {
+                return null;
+            }
+            if (Math.abs(node.value - target) < Math.abs(closest - target)) {
+                closest = node.value;
+            }
+            if (target < node.value) {
+                return traverse(node.left);
+            } else {
+                return traverse(node.right);
+            }
+        }
+        traverse(this.root);
+        return closest;
+    }
+
+    removeEven(root = this.root) {
+        if (root == null) return null;
+        root.left = this.removeEven(root.left);
+        root.right = this.removeEven(root.right);
+
+        if (root.value % 2 == 0) {
+            return this.deleteNode(root.value, root);
+        }
+
+        return root;
+    }
+    
+    heightTree(root=this.root,height){
+        if(root==null )return -1
+        let leftHeight = this.heightTree(root.left)
+        let rightHeight = this.heightTree(root.right)
+        return Math.max(leftHeight,rightHeight)+1
+    }
+    findDepth(target,root=this.root,depth=0){
+        if(root ==null)return -1
+        if(root.value==target)return depth
+        if(root.value>target){
+            return this.findDepth(target,root.left,depth+1)
         }else{
-            this.insertNewNode(this.root,newNode)
+            return this.findDepth(target,root.right,depth+1)
         }
     }
-    insertNewNode(root,newNode){
-        if(newNode.value<root.value){
-            if(root.left==null){
-                root.left = newNode
-            }else{
-                this.insertNewNode(root.left,newNode)
-            }
-        }else{
-            if(root.right == null){
-                root.right = newNode
-            }else{
-                this.insertNewNode(root.right,newNode)
-            }
-        }
-    }
-    
-    
-    preOrder(root = this.root){
-        if(root){
-            console.log(root.value)
-            this.preOrder(root.left)
-            this.preOrder(root.right)
-        }
-    }
-    
-    inOrder(root = this.root){
-        if(root){
-            this.inOrder(root.left)
-            console.log(root.value)
-            this.inOrder(root.right)
-        }
-    }
-    postOrder(root = this.root){
-        if(root){
-            this.postOrder(root.left)
-            this.postOrder(root.right)
-            console.log(root.value)
-        }
-    }
-    
-    levelOrder(){
-        const queue=[]
-        if(this.root){
-            queue.push(this.root)
-        }
-        while(queue.length>0){
-            let current = queue.shift()
-            console.log(current.value)
-            if(current.left){
-                queue.push(current.left)
-            }
-            if(current.right){
-                queue.push(current.right)
-            }
-        }
-    }
-    removeEvenNumber(root = this.root){
-        if(!root)return
-       this.removeEvenNumber(root.left)
-       this.removeEvenNumber(root.right)
-       if(root.value%2==0){
-           this.delete(root.value)
-       }
-    }
-    findSecond(root = this.root,secondLargest=null,largest=null){
-        if(!root) return secondLargest
-        if(largest==null)largest=root.value
-        if(secondLargest==null)secondLargest=root.value
+    findSecondLargest(root = this.root,largest = null, secondLargest=null){
+        if(root ==null) return secondLargest
+         if(largest==null)largest= this.root.value
+        if(secondLargest==null)secondLargest = this.root.value
         if(root.value>largest){
-            secondLargest=largest
+            secondLargest = largest
             largest = root.value
-        }else if(root.value<largest&&root.value>secondLargest){
+        }else if(root.value>secondLargest&&root.value<largest){
             secondLargest=root.value
         }
-        let leftResult=this.findSecond(root.left,secondLargest,largest)
-        let rightResult = this.findSecond(root.right,secondLargest,largest)
-        return Math.max(leftResult,rightResult)
+        let leftresult = this.findSecondLargest(root.left,largest,secondLargest)
+        let rightresult=this.findSecondLargest(root.right,largest,secondLargest)
+        return Math.max(leftresult,rightresult)
     }
-    
 }
-const bst = new binarySearchTree()
-// console.log(bst.isEmpty())
 
-bst.insert(10)
-bst.insert(5)
-bst.insert(15)
-bst.insert(2)
-bst.insert(12)
-bst.insert(7)
-bst.insert(18)
-// console.log(bst.search(5))
-bst.levelOrder()
-console.log("hi")
-bst.delete(2)
-bst.levelOrder()
-// console.log(bst.max())
-
-
-
-
-
-
-
-
+const BST = new BinarySearchTree();
+BST.insert(12);
+BST.insert(4);
+BST.insert(44)
+BST.insert(45)
+BST.insert(55);
+BST.insert(6);
+BST.insert(7);
+// BST.inOrder();
+// BST.levelOrder();
+// BST.delete(55);
+// BST.removeEven();
+// console.log(BST.findClosest(10));
+console.log(BST.findSecondLargest())
+// console.log(BST.findDepth(7))
+// console.log(BST.heightTree())
+// BST.levelOrder();
