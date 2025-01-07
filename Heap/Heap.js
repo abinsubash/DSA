@@ -109,7 +109,7 @@ class MinHeap {
         let smallest = index
         if(left<this.item.length&&this.item[smallest]>this.item[left]){
             smallest = left
-        }
+        } 
         if(right<this.item.length&&this.item[smallest]>this.item[right]){
             smallest = right
         }

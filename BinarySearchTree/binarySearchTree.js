@@ -142,7 +142,7 @@ class BinarySearchTree {
         return root;
     }
     
-    heightTree(root=this.root,height){
+    heightTree(root=this.root){
         if(root==null )return -1
         let leftHeight = this.heightTree(root.left)
         let rightHeight = this.heightTree(root.right)
