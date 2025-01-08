@@ -110,7 +110,6 @@ class BinarySearchTree {
             return this.min(root.left);
         }
     }
-
     findClosest(target) {
         let closest = this.root.value;
         function traverse(node) {

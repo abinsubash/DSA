@@ -74,8 +74,8 @@ search(word){
             traverse(cur,prifix)
             return res
     }
+    
     deleteWord(word){
-        
         function deletefn(word,cur,index){
             if(index==word.length){
                 if(!cur.endword){
