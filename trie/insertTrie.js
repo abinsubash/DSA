@@ -30,17 +30,7 @@ search(word){
     }
     return cur.endword
 }
-   
-   startWith(word){
-        let cur = this.root
-        for(let char of word){
-            if(!cur.children[char]){
-                return false
-            }
-            cur = cur.children[char]
-        }
-        return true
-   } 
+    
     print(root = this.root,word=" "){
         if(root.endword){
             console.log(word)
